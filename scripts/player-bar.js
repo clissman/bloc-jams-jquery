@@ -4,15 +4,20 @@
         $(this).attr('playState', player.playState);
     });
 
-    $('button#next').on('click', function() {
+    $('button#next').on('click', () => changeSong(1));
+    $('button#previous').on('click', () => changeSong(-1));
+
+    function changeSong(direction) {
         if (player.playState !== 'playing') { return; }
 
         const currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
-        const nextSongIndex = currentSongIndex + 1  
+        const newSongIndex = currentSongIndex + direction
 
-        if (nextSongIndex >= album.songs.length) {return ;}
+        if (newSongIndex < 0 || newSongIndex >= album.songs.length) { return; }
 
-        const nextSong = album.songs[nextSongIndex];
-        player.playPause(nextSong);
-    });
+        const newSong = album.songs[newSongIndex]
+        player.playPause(newSong)
+
+    }
 }
+
