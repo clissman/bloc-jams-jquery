@@ -9,13 +9,13 @@
                         <span class='ion-play'></span>
                         <span class='ion-pause'></span>
                         <td>${title}</td>
-                        <td>${duration}</td>
+                        <td>${player.prettyTime(duration)}</td>
                     </button>
             </tr>
         `);
         
         song.element.on('click', () => {
-            player.playPause(song)
+            helper.playPauseAndUpdate(song)
             $('button#play-pause').attr('playState', player.playState)
         });
 
